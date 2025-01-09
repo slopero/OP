@@ -1,0 +1,40 @@
+﻿@page
+@model WebApplication7.Pages.Auth
+@{
+    ViewData["Title"] = "Авторизация";
+}
+
+<h2>Авторизация</h2>
+
+<form method="post">
+    <div>
+        <label for="Email">Email:</label>
+        <br>
+        <input class="input" type="text" id="Email" name="Email" required />
+    </div>
+    <div>
+        <label for="Password">Пароль:</label>
+        <br>
+        <input class="input" type="password" id="Password" name="Password" required />
+    </div>
+    <button class="button" type="submit">Войти</button>
+</form>
+
+<style>
+    .input
+    {
+        margin: 15px;
+        border-radius: 5px;
+        
+    }
+    .button
+    {
+        margin: 15px;
+        padding: 5px;
+        background-color: #87CEEB;
+        border-radius: 5px;
+        border: none;
+    }
+</style>
+
+<p>@Model.Message</p>

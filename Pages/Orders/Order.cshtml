@@ -1,0 +1,55 @@
+﻿@page
+@model OrderModel
+@{
+    ViewData["Title"] = "Оформление заказа";
+}
+
+<h2>Оформление заказа</h2>
+
+<form method="post">
+    <h3>Ваши товары:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Фото</th>
+                <th>Название</th>
+                <th>Цена за единицу</th>
+                <th>Количество</th>
+                <th>Итого</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                <tr>
+                    <td>
+                        <img src="@item.ImageUrl" alt="@item.ProductName" width="50" />
+                    </td>
+                    <td>@item.ProductName</td>
+                    <td>@item.UnitPrice.ToString("C")</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.TotalPrice.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h3>Выбор способа оплаты:</h3>
+    <select asp-for="PaymentType">
+        <option value="SBP">СБП</option>
+        <option value="Cash">Наличными</option>
+    </select>
+
+    <h3>Выбор способа доставки:</h3>
+    <select asp-for="DeliveryType">
+        <option value="Standard">Стандартная доставка</option>
+        <option value="Express">Экспресс-доставка</option>
+    </select>
+
+    <h3>Комментарии:</h3>
+    <textarea asp-for="Comment"></textarea>
+
+    <h4>Общая сумма: @Model.TotalAmount.ToString("C")</h4>
+
+    <button type="submit">Подтвердить заказ</button>
+</form>

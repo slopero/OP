@@ -1,0 +1,48 @@
+﻿@page
+@model WishlistModel
+@{
+    ViewData["Title"] = "Список желаемого";
+}
+
+<h2>Список желаемого</h2>
+
+@if (Model.WishlistItems != null && Model.WishlistItems.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Фото</th>
+                <th>Название</th>
+                <th>Цена</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.WishlistItems)
+            {
+                <tr>
+                    <td>
+                        <img src="@item.ImageUrl" alt="@item.ProductName" width="50" />
+                    </td>
+                    <td>@item.ProductName</td>
+                    <td>@item.UnitPrice.ToString("C")</td>
+                    <td>
+                        <form method="post" asp-page-handler="RemoveFromWishlist">
+                            <input type="hidden" name="productId" value="@item.ProductId" />
+                            <button type="submit">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Список желаемого пуст.</p>
+}
+
+@if (TempData["Notification"] != null)
+{
+    <div class="notification">@TempData["Notification"]</div>
+}
